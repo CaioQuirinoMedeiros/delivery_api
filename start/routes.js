@@ -3,13 +3,13 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', () => {
-  return { bem_vindo: 'api de delivery por Caio Quirino' }
-})
-
-Route.post('users', 'UserController.store').validator('User')
+Route.post('users', 'UserController.store')
 Route.post('sessions', 'SessionController.store').validator('Session')
 
-Route.resource('products', 'ProductController')
-  .apiOnly()
-  .middleware('auth')
+Route.group(() => {
+  Route.resource('categories', 'CategoryController').apiOnly()
+
+  Route.resource('products', 'ProductController').apiOnly()
+
+  Route.resource('images', 'ImageController').apiOnly()
+}).middleware('auth')
