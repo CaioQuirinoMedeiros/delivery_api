@@ -9,7 +9,7 @@ class User {
     return {
       name: 'required',
       email: 'email|required|unique:users',
-      password: 'required'
+      password: 'required|confirmed'
     }
   }
 
@@ -19,7 +19,8 @@ class User {
       'email.required': 'Necessário fornecer um email',
       'email.email': 'Forneça um email válido',
       'email.unique': 'Email já cadastrado',
-      'password.required': 'Necessário fornecer uma senha'
+      'password.required': 'Necessário fornecer uma senha',
+      'password.confirmed': 'As senhas não são iguais'
     }
   }
 }
