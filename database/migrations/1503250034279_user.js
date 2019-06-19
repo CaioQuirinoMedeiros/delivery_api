@@ -16,7 +16,6 @@ class UserSchema extends Schema {
         .notNullable()
         .unique()
       table.string('password', 60).notNullable()
-      table.string('role').notNullable()
       table.timestamps()
     })
   }
