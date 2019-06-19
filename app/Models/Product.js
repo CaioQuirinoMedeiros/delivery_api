@@ -4,8 +4,11 @@
 const Model = use('Model')
 
 class Product extends Model {
-  types () {
-    return this.hasMany('App/Models/Type')
+  image () {
+    return this.belongsTo('App/Models/Image')
+  }
+  categories () {
+    return this.belongsToMany('App/Models/Category')
   }
 }
 
