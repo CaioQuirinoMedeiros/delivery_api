@@ -3,7 +3,8 @@ node_modules
 
 # Adonis directory for storing tmp files
 tmp
-public
+public/uploads/*
+!public/uploads/.gitkeep
 
 # Environment variables, never commit this file
 .env
