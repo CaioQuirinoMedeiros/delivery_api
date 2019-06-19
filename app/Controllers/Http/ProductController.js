@@ -2,6 +2,7 @@
 'use strict'
 
 const Product = use('App/Models/Product')
+const Category = use('App/Models/Category')
 
 const Database = use('Database')
 
@@ -28,17 +29,17 @@ class ProductController {
 
   async store ({ request, response }) {
     const trx = await Database.beginTransaction()
-    const { name, base_price, image_id, categories, sizes } = request.all()
+    const { name, base_price, image_id, category_id, sizes } = request.all()
 
     try {
-      const product = await Product.create({ name, base_price, image_id }, trx)
+      const category = await Category.findOrFail(category_id)
 
-      if (categories) {
-        await product.categories().attach([...categories], trx)
-      }
+      const product = await category
+        .products()
+        .create({ name, base_price, image_id, category_id }, trx)
 
       if (sizes) {
-        product.sizes().createMany(sizes, trx)
+        await product.sizes().createMany(sizes, trx)
       }
 
       await trx.commit()
@@ -57,7 +58,7 @@ class ProductController {
 
       await product.loadMany({
         image: null,
-        categories: null,
+        category: null,
         sizes: size => size.with('size')
       })
 
@@ -70,16 +71,18 @@ class ProductController {
 
   async update ({ params, request, response }) {
     const trx = await Database.beginTransaction()
-    const { name, base_price, image_id, categories, sizes } = request.all()
+    const { name, base_price, image_id, category_id, sizes } = request.all()
 
     try {
       const product = await Product.findOrFail(params.id)
+      const oldCategory = await Category.findOrFail(product.category_id)
+      const category = await Category.findOrFail(category_id)
 
-      product.merge({ name, base_price, image_id })
+      await oldCategory.products().detach([product.id], trx)
 
-      if (categories) {
-        await product.categories().sync([...categories], trx)
-      }
+      await category.products().attach([product.id], trx)
+
+      product.merge({ name, base_price, image_id, category_id })
 
       if (sizes) {
         await product.sizes().delete(trx)

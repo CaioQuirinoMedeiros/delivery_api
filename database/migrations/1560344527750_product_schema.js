@@ -16,6 +16,13 @@ class ProductSchema extends Schema {
         .inTable('images')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
+      table
+        .integer('category_id')
+        .unsigned()
+        .references('id')
+        .inTable('categories')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE')
       table.timestamps()
     })
 
