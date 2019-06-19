@@ -17,7 +17,7 @@ class SizeController {
   }
 
   async store ({ request, response }) {
-    const data = request.only(['size', 'multiplier', 'image_id', 'category_id'])
+    const data = request.only(['name', 'multiplier', 'image_id', 'category_id'])
 
     try {
       const size = await Size.create(data)
@@ -47,7 +47,7 @@ class SizeController {
   }
 
   async update ({ params, request, response }) {
-    const data = request.only(['size', 'multiplier', 'image_id', 'category_id'])
+    const data = request.only(['name', 'multiplier', 'image_id', 'category_id'])
     try {
       const size = await Size.findOrFail(params.id)
 

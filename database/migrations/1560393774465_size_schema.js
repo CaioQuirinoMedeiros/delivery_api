@@ -7,7 +7,7 @@ class SizeSchema extends Schema {
   up () {
     this.create('sizes', table => {
       table.increments()
-      table.string('size').notNullable()
+      table.string('name').notNullable()
       table.decimal('multiplier', 10, 2).defaultTo(1)
       table
         .integer('category_id')
