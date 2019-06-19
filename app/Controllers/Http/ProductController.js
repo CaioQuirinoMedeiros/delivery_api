@@ -1,43 +1,91 @@
+/* eslint-disable camelcase */
 'use strict'
 
 const Product = use('App/Models/Product')
 
 class ProductController {
-  async index ({ request, response, view }) {
-    const products = await Product.all()
+  async index ({ request, response, pagination }) {
+    const { page, limit } = pagination
+    const categoryId = request.input('category')
 
-    return products
+    const query = Product.query()
+
+    if (categoryId) {
+      query.where('category_id', categoryId)
+    }
+
+    try {
+      const products = await query.with('image').paginate(page, limit)
+
+      return response.status(200).send(products)
+    } catch (err) {
+      console.log(err)
+      return response.status(400).send({ message: 'Erro ao listar produtos' })
+    }
   }
 
-  async store ({ request }) {
-    const { name } = request.all()
+  async store ({ request, response }) {
+    const { name, base_price, image_id, categories } = request.all()
 
-    const product = await Product.create({ name })
+    try {
+      const product = await Product.create({ name, base_price, image_id })
 
-    return product
+      await product.categories().attach([...categories])
+
+      return response.status(201).send(product)
+    } catch (err) {
+      console.log(err)
+      return response.status(400).send({ message: 'Erro ao criar produto' })
+    }
   }
 
-  async show ({ params }) {
-    const product = await Product.find(params.id)
+  async show ({ params, request, response }) {
+    try {
+      const product = await Product.findOrFail(params.id)
 
-    return product
+      await product.loadMany(['image', 'categories'])
+
+      return response.status(200).send(product)
+    } catch (err) {
+      console.log(err)
+      return response.status(400).send({ message: 'Erro ao exibir produto' })
+    }
   }
 
-  async update ({ params, request }) {
-    const { name } = request.all()
-    const product = await Product.find(params.id)
+  async update ({ params, request, response }) {
+    const { name, base_price, image_id, categories } = request.all()
 
-    product.merge({ name })
+    try {
+      const product = await Product.findOrFail(params.id)
 
-    await product.save()
+      product.merge({ name, base_price, image_id })
 
-    return product
+      if (categories) {
+        await product.categories().detach()
+
+        await product.categories().attach([...categories])
+      }
+
+      await product.save()
+
+      return response.status(200).send(product)
+    } catch (err) {
+      console.log(err)
+      return response.status(400).send({ message: 'Erro ao editar produto' })
+    }
   }
 
-  async destroy ({ params }) {
-    const product = await Product.find(params.id)
+  async destroy ({ params, request, response }) {
+    try {
+      const product = await Product.findOrFail(params.id)
 
-    await product.delete()
+      await product.delete()
+
+      return response.status(204).send()
+    } catch (err) {
+      console.log(err)
+      return response.status(400).send({ message: 'Erro ao deletar produto' })
+    }
   }
 }
 
