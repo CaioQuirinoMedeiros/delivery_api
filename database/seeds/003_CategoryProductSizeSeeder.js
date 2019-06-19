@@ -12,12 +12,11 @@
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Category = use('App/Models/Category')
-const Product = use('App/Models/Product')
 const Size = use('App/Models/Size')
 
 class CategoryProductSizeSeeder {
   async run () {
-    await Category.createMany([
+    const categories = await Category.createMany([
       {
         name: 'Pizzas',
         description: 'Pizzas gostosas prontas para comer',
@@ -33,48 +32,53 @@ class CategoryProductSizeSeeder {
     ])
 
     await Size.createMany([
-      { size: 'Gigante', multiplier: 1.2, category_id: 1, image_id: 3 },
-      { size: 'Grande', multiplier: 1.1, category_id: 1, image_id: 4 },
-      { size: 'Média', multiplier: 1, category_id: 1, image_id: 5 },
-      { size: 'Pequena', multiplier: 0.9, category_id: 1, image_id: 6 }
+      { name: 'Gigante', multiplier: 1.2, category_id: 1, image_id: 3 },
+      { name: 'Grande', multiplier: 1.1, category_id: 1, image_id: 4 },
+      { name: 'Média', multiplier: 1, category_id: 1, image_id: 5 },
+      { name: 'Pequena', multiplier: 0.9, category_id: 1, image_id: 6 }
     ])
 
-    const products = await Product.createMany([
+    const pizzas = await categories[0].products().createMany([
       {
         name: 'Pizza Bacon',
         base_price: 25,
-        image_id: 7
+        image_id: 7,
+        category_id: 1
       },
       {
         name: 'Pizza Frango Frito',
         base_price: 25,
-        image_id: 8
+        image_id: 8,
+        category_id: 1
       },
       {
         name: 'Pizza Margherita',
         base_price: 27,
-        image_id: 9
+        image_id: 9,
+        category_id: 1
       },
       {
         name: 'Pizza Mussarela',
         base_price: 27,
-        image_id: 10
+        image_id: 10,
+        category_id: 1
       },
       {
         name: 'Pizza Napolitana',
         base_price: 28.5,
-        image_id: 11
+        image_id: 11,
+        category_id: 1
       },
       {
         name: 'Pizza Portuguesa',
         base_price: 28.5,
-        image_id: 12
+        image_id: 12,
+        category_id: 1
       }
     ])
 
-    await Promise.all(products.map(product => product.categories().attach([1])))
     await Promise.all(
-      products.map(product =>
+      pizzas.map(product =>
         product
           .sizes()
           .createMany([

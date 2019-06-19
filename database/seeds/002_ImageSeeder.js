@@ -49,32 +49,32 @@ class ImageSeeder {
       },
       {
         path: 'pizzas/bacon.png',
-        original_name: 'Pizza pequena',
+        original_name: 'Pizza bacon',
         extension: 'png'
       },
       {
         path: 'pizzas/frango_frito.png',
-        original_name: 'Pizza pequena',
+        original_name: 'Pizza frango_frito',
         extension: 'png'
       },
       {
         path: 'pizzas/margherita.png',
-        original_name: 'Pizza pequena',
+        original_name: 'Pizza margherita',
         extension: 'png'
       },
       {
         path: 'pizzas/mussarela.png',
-        original_name: 'Pizza pequena',
+        original_name: 'Pizza mussarela',
         extension: 'png'
       },
       {
         path: 'pizzas/napolitana.png',
-        original_name: 'Pizza pequena',
+        original_name: 'Pizza napolitana',
         extension: 'png'
       },
       {
         path: 'pizzas/portuguesa.png',
-        original_name: 'Pizza pequena',
+        original_name: 'Pizza portuguesa',
         extension: 'png'
       }
     ])
