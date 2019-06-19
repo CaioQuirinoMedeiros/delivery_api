@@ -11,10 +11,6 @@ class Size extends Model {
   category () {
     return this.belongsTo('App/Models/Category')
   }
-
-  products () {
-    return this.belongsToMany('App/Models/Product')
-  }
 }
 
 module.exports = Size

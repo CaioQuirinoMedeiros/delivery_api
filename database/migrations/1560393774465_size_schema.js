@@ -23,6 +23,24 @@ class SizeSchema extends Schema {
         .onDelete('CASCADE')
       table.timestamps()
     })
+
+    this.create('product_size', table => {
+      table.increments()
+      table
+        .integer('product_id')
+        .unsigned()
+        .references('id')
+        .inTable('products')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE')
+      table
+        .integer('size_id')
+        .unsigned()
+        .references('id')
+        .inTable('products')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE')
+    })
   }
 
   down () {

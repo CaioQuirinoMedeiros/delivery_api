@@ -7,6 +7,7 @@ class ProductSizeSchema extends Schema {
   up () {
     this.create('product_sizes', table => {
       table.increments()
+      table.decimal('price', 12, 2)
       table
         .integer('product_id')
         .unsigned()

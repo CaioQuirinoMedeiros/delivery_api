@@ -3,6 +3,8 @@
 
 const Product = use('App/Models/Product')
 
+const Database = use('Database')
+
 class ProductController {
   async index ({ request, response, pagination }) {
     const { page, limit } = pagination
@@ -25,25 +27,39 @@ class ProductController {
   }
 
   async store ({ request, response }) {
-    const { name, base_price, image_id, categories } = request.all()
+    const trx = await Database.beginTransaction()
+    const { name, base_price, image_id, categories, sizes } = request.all()
 
     try {
-      const product = await Product.create({ name, base_price, image_id })
+      const product = await Product.create({ name, base_price, image_id }, trx)
 
-      await product.categories().attach([...categories])
+      if (categories) {
+        await product.categories().attach([...categories], trx)
+      }
+
+      if (sizes) {
+        product.sizes().createMany(sizes, trx)
+      }
+
+      await trx.commit()
 
       return response.status(201).send(product)
     } catch (err) {
       console.log(err)
+      await trx.rollback()
       return response.status(400).send({ message: 'Erro ao criar produto' })
     }
   }
 
-  async show ({ params, request, response }) {
+  async show ({ params, response }) {
     try {
       const product = await Product.findOrFail(params.id)
 
-      await product.loadMany(['image', 'categories'])
+      await product.loadMany({
+        image: null,
+        categories: null,
+        sizes: size => size.with('size')
+      })
 
       return response.status(200).send(product)
     } catch (err) {
@@ -53,7 +69,8 @@ class ProductController {
   }
 
   async update ({ params, request, response }) {
-    const { name, base_price, image_id, categories } = request.all()
+    const trx = await Database.beginTransaction()
+    const { name, base_price, image_id, categories, sizes } = request.all()
 
     try {
       const product = await Product.findOrFail(params.id)
@@ -61,21 +78,27 @@ class ProductController {
       product.merge({ name, base_price, image_id })
 
       if (categories) {
-        await product.categories().detach()
-
-        await product.categories().attach([...categories])
+        await product.categories().sync([...categories], trx)
       }
 
-      await product.save()
+      if (sizes) {
+        await product.sizes().delete(trx)
+        await product.sizes().createMany(sizes, trx)
+      }
+
+      await product.save(trx)
+
+      await trx.commit()
 
       return response.status(200).send(product)
     } catch (err) {
       console.log(err)
+      await trx.rollback()
       return response.status(400).send({ message: 'Erro ao editar produto' })
     }
   }
 
-  async destroy ({ params, request, response }) {
+  async destroy ({ params, response }) {
     try {
       const product = await Product.findOrFail(params.id)
 

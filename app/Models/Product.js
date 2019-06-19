@@ -7,8 +7,13 @@ class Product extends Model {
   image () {
     return this.belongsTo('App/Models/Image')
   }
+
   categories () {
     return this.belongsToMany('App/Models/Category')
+  }
+
+  sizes () {
+    return this.hasMany('App/Models/ProductSize')
   }
 }
 
