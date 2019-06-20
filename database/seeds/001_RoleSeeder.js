@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| UserSeeder
+| RoleSeeder
 |--------------------------------------------------------------------------
 |
 | Make use of the Factory instance to seed database with dummy data or
@@ -11,20 +11,22 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use('Factory')
+const Role = use('Role')
 
-const User = use('App/Models/User')
-
-class UserSeeder {
+class RoleSeeder {
   async run () {
-    await Factory.model('App/Models/User').createMany(20)
+    await Role.create({
+      name: 'Admin',
+      slug: 'admin',
+      description: 'Administrador do sistema'
+    })
 
-    await User.create({
-      name: 'Caio',
-      email: 'caio1@gmail.com',
-      password: 'pedemanga'
+    await Role.create({
+      name: 'Client',
+      slug: 'client',
+      description: 'Cliente do sistema'
     })
   }
 }
 
-module.exports = UserSeeder
+module.exports = RoleSeeder
