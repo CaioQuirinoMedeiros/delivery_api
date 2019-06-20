@@ -2,7 +2,6 @@
 'use strict'
 
 const Order = use('App/Models/Order')
-const Database = use('Database')
 
 class OrderController {
   async index ({ response, request, pagination }) {
@@ -60,7 +59,8 @@ class OrderController {
 
       await order.loadMany({
         user: null,
-        items: item => item.with('product_size.product')
+        items: item =>
+          item.with('product_size.product').with('product_size.size')
       })
 
       return response.status(200).send(order)
@@ -72,7 +72,6 @@ class OrderController {
   }
 
   async update ({ params, request, response }) {
-    const trx = await Database.beginTransaction()
     const data = request.only([
       'user_id',
       'observations',
@@ -90,21 +89,17 @@ class OrderController {
       order.merge(data)
 
       if (items && Array.isArray(items) && items.length) {
-        await order.items().delete(trx)
-        await order.items().createMany(items, trx)
+        await order.items().delete()
+        await order.items().createMany(items)
       }
 
-      await order.save(trx)
-
-      await trx.commit()
+      await order.save()
 
       order = await Order.find(order.id)
 
       return response.status(200).send(order)
     } catch (err) {
       console.log(err)
-      await trx.rollback()
-
       return response.status(400).send({ message: 'Erro ao editar pedido' })
     }
   }
