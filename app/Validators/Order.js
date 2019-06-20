@@ -7,6 +7,7 @@ class Order {
 
   get rules () {
     return {
+      user_id: 'required|integer|exists:users,id',
       observations: 'string',
       zip_code: 'required|string',
       district: 'required|string',
@@ -19,6 +20,9 @@ class Order {
 
   get messages () {
     return {
+      'user_id.required': 'Necessário fornecer o id do usuário',
+      'user_id.integer': 'O id do usuário deve ser um inteiro',
+      'user_id.exists': 'O usuário não existe',
       'observations.string': 'As observações devem ser um texto',
       'zip_code.required': 'Necessário fornecer o CEP',
       'zip_code.string': 'O CEP deve ser um texto',
