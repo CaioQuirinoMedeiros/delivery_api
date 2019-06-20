@@ -38,19 +38,13 @@ class OrderController {
     const items = request.input('items')
 
     try {
-      const order = await Order.create(data)
+      if (!Array.isArray(items) || !items.length) throw Error
 
-      if (!Array.isArray(items) || !items.length) {
-        return response
-          .status(400)
-          .send({ message: 'Nenhum item para criar pedido' })
-      }
+      let order = await Order.create(data)
 
       await order.items().createMany(items)
 
-      order.total = await order.items().getSum('subtotal')
-
-      await order.save()
+      order = await Order.find(order.id)
 
       return response.status(201).send(order)
     } catch (err) {
@@ -85,23 +79,26 @@ class OrderController {
       'zip_code',
       'district',
       'street',
-      'number'
+      'number',
+      'status'
     ])
     const items = request.input('items')
 
     try {
-      const order = await Order.findOrFail(params.id)
+      let order = await Order.findOrFail(params.id)
 
       order.merge(data)
 
       if (items && Array.isArray(items) && items.length) {
-        await order.items().delete()
+        await order.items().delete(trx)
         await order.items().createMany(items, trx)
       }
 
       await order.save(trx)
 
       await trx.commit()
+
+      order = await Order.find(order.id)
 
       return response.status(200).send(order)
     } catch (err) {
