@@ -4,11 +4,6 @@
 const Model = use('Model')
 
 class Order extends Model {
-  static boot () {
-    super.boot()
-
-    this.addHook('afterSave', 'OrderHook.updateTotal')
-  }
   items () {
     return this.hasMany('App/Models/OrderItem')
   }

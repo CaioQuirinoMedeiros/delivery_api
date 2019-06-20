@@ -20,6 +20,10 @@ class ProductSize extends Model {
   size () {
     return this.belongsTo('App/Models/Size')
   }
+
+  items () {
+    return this.belongsToMany('App/Models/OrderItem')
+  }
 }
 
 module.exports = ProductSize

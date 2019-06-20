@@ -13,5 +13,7 @@ Route.group(() => {
 
   Route.resource('sizes', 'SizeController').apiOnly()
 
+  Route.resource('orders', 'OrderController').apiOnly()
+
   Route.resource('images', 'ImageController').apiOnly()
 }).middleware('auth')

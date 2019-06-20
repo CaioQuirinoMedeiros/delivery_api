@@ -10,10 +10,10 @@ class OrderItemSchema extends Schema {
       table.integer('quantity').unsigned()
       table.decimal('subtotal', 12, 2)
       table
-        .integer('product_id')
+        .integer('product_size_id')
         .unsigned()
         .references('id')
-        .inTable('products')
+        .inTable('product_sizes')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
       table
@@ -24,9 +24,26 @@ class OrderItemSchema extends Schema {
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
     })
+
+    this.create('order_item_product_size', table => {
+      table.increments()
+      table
+        .integer('order_item_id')
+        .unsigned()
+        .references('id')
+        .inTable('order_items')
+        .onDelete('cascade')
+      table
+        .integer('product_size_id')
+        .unsigned()
+        .references('id')
+        .inTable('product_sizes')
+        .onDelete('cascade')
+    })
   }
 
   down () {
+    this.drop('product_size_order_item')
     this.drop('order_items')
   }
 }
