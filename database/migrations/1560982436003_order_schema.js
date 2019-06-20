@@ -8,6 +8,11 @@ class OrderSchema extends Schema {
     this.create('orders', table => {
       table.increments()
       table.decimal('total', 12, 2).defaultTo(0.0)
+      table.text('observations')
+      table.string('zip code').notNullable()
+      table.string('district').notNullable()
+      table.string('street').notNullable()
+      table.integer('number')
       table
         .integer('user_id')
         .unsigned()

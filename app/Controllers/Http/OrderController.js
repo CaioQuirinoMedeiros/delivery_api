@@ -27,10 +27,18 @@ class OrderController {
   }
 
   async store ({ request, response }) {
-    const { user_id, items } = request.all()
+    const data = request.only([
+      'user_id',
+      'observations',
+      'zip code',
+      'district',
+      'street',
+      'number'
+    ])
+    const items = request.input('items')
 
     try {
-      const order = await Order.create({ user_id })
+      const order = await Order.create(data)
 
       if (!Array.isArray(items) || !items.length) {
         return response
@@ -71,14 +79,22 @@ class OrderController {
 
   async update ({ params, request, response }) {
     const trx = await Database.beginTransaction()
-    const { user_id, items } = request.all()
+    const data = request.only([
+      'user_id',
+      'observations',
+      'zip code',
+      'district',
+      'street',
+      'number'
+    ])
+    const items = request.input('items')
 
     try {
       const order = await Order.findOrFail(params.id)
 
-      order.merge({ user_id })
+      order.merge(data)
 
-      if (items) {
+      if (items && Array.isArray(items) && items.length) {
         await order.items().delete()
         await order.items().createMany(items, trx)
       }

@@ -43,7 +43,7 @@ class OrderItemSchema extends Schema {
   }
 
   down () {
-    this.drop('product_size_order_item')
+    this.drop('order_item_product_size')
     this.drop('order_items')
   }
 }
