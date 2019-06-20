@@ -12,7 +12,6 @@ OrderItemHook.updateSubtotal = async model => {
 }
 
 OrderItemHook.attachProductSize = async model => {
-  console.log(model)
   const product_size = await ProductSize.find(model.product_size_id)
 
   await product_size.items().attach([model.id])
