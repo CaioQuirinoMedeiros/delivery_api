@@ -30,7 +30,7 @@ class OrderController {
     const data = request.only([
       'user_id',
       'observations',
-      'zip code',
+      'zip_code',
       'district',
       'street',
       'number'
@@ -82,7 +82,7 @@ class OrderController {
     const data = request.only([
       'user_id',
       'observations',
-      'zip code',
+      'zip_code',
       'district',
       'street',
       'number'
