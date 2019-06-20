@@ -26,4 +26,17 @@ Route.group(() => {
     .validator(new Map([[['orders.store', 'orders.update'], ['Order']]]))
 
   Route.resource('images', 'ImageController').apiOnly()
-}).middleware('auth')
+})
+  .prefix('admin')
+  .namespace('Admin')
+  .middleware(['auth', 'is:admin'])
+
+Route.group(() => {
+  Route.resource('categories', 'CategoryController').only(['index', 'show'])
+
+  Route.resource('products', 'ProductController').only(['index', 'show'])
+
+  Route.resource('orders', 'OrderController').only(['index', 'show', 'store'])
+})
+  .namespace('Client')
+  .middleware(['auth', 'is:client'])
