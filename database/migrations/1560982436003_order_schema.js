@@ -12,6 +12,9 @@ class OrderSchema extends Schema {
       table.string('zip_code').notNullable()
       table.string('district').notNullable()
       table.string('street').notNullable()
+      table
+        .enu('status', ['pending', 'cancelled', 'shipped', 'paid', 'finished'])
+        .defaultTo('pending')
       table.integer('number')
       table
         .integer('user_id')

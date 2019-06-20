@@ -12,6 +12,7 @@ class Order {
       district: 'required|string',
       street: 'required|string',
       number: 'integer',
+      status: 'string',
       items: 'required:array'
     }
   }
@@ -25,6 +26,8 @@ class Order {
       'district.string': 'O bairro deve ser um texto',
       'street.required': 'Necessário fornecer a rua',
       'street.string': 'A rua deve ser um texto',
+      'number.integer': 'O número deve ser um inteiro',
+      'status.string': 'O status deve ser um texto',
       'items.required': 'Necessário adicionar items ao pedido',
       'items.array': 'Os items devem ser um array'
     }
