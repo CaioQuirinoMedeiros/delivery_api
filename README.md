@@ -1,28 +1,21 @@
-# Adonis API application
+# Adonis API delivery app
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
+Essa é uma API para um aplicativo de delivery. Permite criar usuário e realizar pedidos de produtos que pertencem a uma categoria e possuem diversos tamanhos. o usuário pode ser Administrador ou Cliente.
 
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+Administrador tem acesso às rotas de administrador e pode realizar CRUD de categorias (pizzas, massas, bebidas...), produtos (calabresa, mussarela...), tamanhos (grande, média, pequena...), pedidos e imagens.
+
+Cliente tem acesso às rotas de clientes, podendo visualizar categorias e produtos e criar pedidos, bem como visualizar seus próprios pedidos.
+
+Com as rotas separadas, o applicativo, voltado para o cliente, consumirá as rotas de clientes e a aplicação web consumirá as rotas de administrador, como manda o projeto.
 
 ## Setup
 
-Use the adonis command to install the blueprint
-
-```bash
-adonis new yardstick --api-only
-```
-
-or manually clone the repo and then run `npm install`.
-
+Para instalar as dependencias, excecute o comando `npm install`. Para rodar a API, em desenvolvimento, excecute o comando `adonis serve --dev`
 
 ### Migrations
 
-Run the following command to run startup migrations.
+Para rodar as migrations e criar as tabelas, excecute o comando `adonis migration:run`
 
-```js
-adonis migration:run
-```
+### Seed
+
+Para alimentar as tabelas com alguns dados, excecute o comando `adonis seed`
