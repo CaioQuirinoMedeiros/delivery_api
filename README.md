@@ -11,7 +11,9 @@ Com as rotas separadas, o applicativo, voltado para o cliente, consumirá as rot
 ## Setup
 
 Para instalar as dependencias, excecute o comando `npm install`.
-Configure as variáveis ambientes no arquivo .env de acordo com o .env.example
+
+Configure as variáveis ambientes no arquivo .env de acordo com o .env.example.
+
 Para rodar a API, em desenvolvimento, excecute o comando `adonis serve --dev`
 
 ### Migrations
