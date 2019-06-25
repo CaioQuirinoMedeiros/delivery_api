@@ -24,6 +24,14 @@ class UserSeeder {
 
     Promise.all(clients.map(client => client.roles().attach([clientRole.id])))
 
+    const client = await User.create({
+      name: 'Caio 2',
+      email: 'caio2@gmail.com',
+      password: 'pedemanga'
+    })
+
+    await client.roles().attach([clientRole.id])
+
     const admin = await User.create({
       name: 'Caio',
       email: 'caio1@gmail.com',
