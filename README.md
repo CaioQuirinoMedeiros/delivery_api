@@ -10,16 +10,16 @@ Com as rotas separadas, o applicativo, voltado para o cliente, consumirá as rot
 
 ## Setup
 
-Para instalar as dependencias, excecute o comando `npm install`.
+Para instalar as dependencias, execute o comando `npm install`.
 
 Configure as variáveis ambientes no arquivo .env de acordo com o .env.example.
 
-Para rodar a API, em desenvolvimento, excecute o comando `adonis serve --dev`
+Para rodar a API, em desenvolvimento, execute o comando `adonis serve --dev`
 
 ### Migrations
 
-Para rodar as migrations e criar as tabelas, excecute o comando `adonis migration:run`
+Para rodar as migrations e criar as tabelas, execute o comando `adonis migration:run`
 
 ### Seed
 
-Para alimentar as tabelas com alguns dados, excecute o comando `adonis seed`
+Para alimentar as tabelas com alguns dados, execute o comando `adonis seed`
