@@ -4,9 +4,8 @@
 const Category = use('App/Models/Category')
 
 class CategoryController {
-  async index ({ request, response, pagination }) {
+  async index ({ request, response }) {
     const name = request.input('name')
-    const { page, limit } = pagination
 
     const query = Category.query()
 
@@ -15,7 +14,7 @@ class CategoryController {
     }
 
     try {
-      const categories = await query.with('image').paginate(page, limit)
+      const categories = await query.with('image').fetch()
 
       return response.status(200).send(categories)
     } catch (err) {

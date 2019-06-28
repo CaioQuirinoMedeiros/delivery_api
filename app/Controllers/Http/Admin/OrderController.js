@@ -4,8 +4,7 @@
 const Order = use('App/Models/Order')
 
 class OrderController {
-  async index ({ response, request, pagination }) {
-    const { page, limit } = pagination
+  async index ({ response, request }) {
     const status = request.input('status')
 
     const query = Order.query()
@@ -14,9 +13,7 @@ class OrderController {
       query.where('status', status)
     }
     try {
-      const orders = await query
-        .with('items.product_size.product')
-        .paginate(page, limit)
+      const orders = await query.with('items.product_size.product').fetch()
 
       return response.status(200).send(orders)
     } catch (err) {

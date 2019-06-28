@@ -4,8 +4,7 @@
 const Product = use('App/Models/Product')
 
 class ProductController {
-  async index ({ request, response, pagination }) {
-    const { page, limit } = pagination
+  async index ({ request, response }) {
     const categoryId = request.input('category')
 
     const query = Product.query()
@@ -15,7 +14,7 @@ class ProductController {
     }
 
     try {
-      const products = await query.with('image').paginate(page, limit)
+      const products = await query.with('image').fetch()
 
       return response.status(200).send(products)
     } catch (err) {

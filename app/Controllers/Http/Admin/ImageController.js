@@ -7,13 +7,11 @@ const Helpers = use('Helpers')
 const fs = use('fs')
 
 class ImageController {
-  async index ({ response, pagination }) {
-    const { page, limit } = pagination
-
+  async index ({ response }) {
     try {
       const images = await Image.query()
         .orderBy('id', 'DESC')
-        .paginate(page, limit)
+        .fetch()
 
       return response.status(200).send(images)
     } catch (err) {
