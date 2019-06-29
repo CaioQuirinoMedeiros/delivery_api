@@ -19,14 +19,16 @@ class CategoryProductSizeSeeder {
     const categories = await Category.createMany([
       {
         name: 'Pizzas',
-        description: 'Pizzas gostosas prontas para comer',
-        cook_time: 25,
+        description:
+          'Mais de 50 sabores de pizza em até 4 tamanhos diferentes de fome',
+        cook_time: 30,
         image_id: 1
       },
       {
         name: 'Massas',
-        description: 'Massas gostosas prontas para comer',
-        cook_time: 15,
+        description:
+          '10 tipos de massas com diferentes molhos para te satisfazer.',
+        cook_time: 25,
         image_id: 2
       }
     ])
