@@ -1,16 +1,26 @@
 'use strict'
 
 const User = use('App/Models/User')
+const Role = use('Role')
 
 class UserController {
-  async store ({ request, auth }) {
+  async store ({ response, request, auth }) {
     const data = await request.only(['name', 'email', 'password'])
 
-    await User.create(data)
+    try {
+      const clientRole = await Role.findBy('slug', 'client')
 
-    const token = await auth.attempt(data.email, data.password)
+      const user = await User.create(data)
 
-    return token
+      await user.roles().attach([clientRole.id])
+
+      const token = await auth.attempt(data.email, data.password)
+
+      return response.status(201).send(token)
+    } catch (err) {
+      console.log(err)
+      return response.status(400).send({ message: 'Erro ao criar usuário' })
+    }
   }
 }
 
