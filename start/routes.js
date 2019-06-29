@@ -36,6 +36,8 @@ Route.group(() => {
 
   Route.resource('products', 'ProductController').only(['index', 'show'])
 
+  Route.resource('sizes', 'ProductSizeController').only(['index', 'show'])
+
   Route.resource('orders', 'OrderController').only(['index', 'show', 'store'])
 })
   .namespace('Client')
