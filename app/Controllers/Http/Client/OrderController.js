@@ -8,13 +8,15 @@ class OrderController {
     const status = request.input('status')
     const user = await auth.getUser()
 
-    const query = Order.query().where('user_id', user.id)
+    const query = Order.query()
+      .where('user_id', user.id)
+      .orderBy('created_at', 'DESC')
 
     if (status) {
       query.where('status', status)
     }
     try {
-      const orders = await query.with('items.product_size.product').fetch()
+      const orders = await query.fetch()
 
       return response.status(200).send(orders)
     } catch (err) {
