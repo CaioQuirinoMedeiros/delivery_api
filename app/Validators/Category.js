@@ -7,7 +7,7 @@ class Category {
 
   get rules () {
     return {
-      name: 'required|string|unique:categories,name',
+      name: 'required|string',
       description: 'required|string',
       cook_time: 'required|integer',
       image_id: 'integer|exists:images,id'
@@ -18,7 +18,6 @@ class Category {
     return {
       'name.required': 'Necessário fornecer um nome',
       'name.string': 'O nome deve ser um texto',
-      'name.unique': 'Essa categoria já existe',
       'description.required': 'Necessário fornecer um email',
       'description.string': 'A descrição deve ser um texto',
       'cook_time.required': 'Necessário fornecer o tempo de cozimento',
