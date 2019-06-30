@@ -37,7 +37,10 @@ class CategoryProductSizeSeeder {
       { name: 'Gigante', multiplier: 1.2, category_id: 1, image_id: 3 },
       { name: 'Grande', multiplier: 1.1, category_id: 1, image_id: 4 },
       { name: 'Média', multiplier: 1, category_id: 1, image_id: 5 },
-      { name: 'Pequena', multiplier: 0.9, category_id: 1, image_id: 6 }
+      { name: 'Pequena', multiplier: 0.9, category_id: 1, image_id: 6 },
+      { name: '700g', multiplier: 0.9, category_id: 2, image_id: 4 },
+      { name: '500g', multiplier: 1.0, category_id: 2, image_id: 5 },
+      { name: '300g', multiplier: 1.1, category_id: 2, image_id: 6 }
     ])
 
     const pizzas = await categories[0].products().createMany([
@@ -79,6 +82,39 @@ class CategoryProductSizeSeeder {
       }
     ])
 
+    const massas = await categories[1].products().createMany([
+      {
+        name: 'Macarrão à Carbonara',
+        base_price: 22,
+        image_id: 7,
+        category_id: 2
+      },
+      {
+        name: 'Macarrão Bolonhesa',
+        base_price: 25,
+        image_id: 8,
+        category_id: 2
+      },
+      {
+        name: 'Macarrão Alho e Óleo',
+        base_price: 24.75,
+        image_id: 9,
+        category_id: 2
+      },
+      {
+        name: 'Macarrão ao Molho de Camarão',
+        base_price: 27,
+        image_id: 10,
+        category_id: 2
+      },
+      {
+        name: 'Macarrão ao Molho Branco',
+        base_price: 28.5,
+        image_id: 11,
+        category_id: 2
+      }
+    ])
+
     await Promise.all(
       pizzas.map(product =>
         product
@@ -89,6 +125,14 @@ class CategoryProductSizeSeeder {
             { size_id: 3 },
             { size_id: 4 }
           ])
+      )
+    )
+
+    await Promise.all(
+      massas.map(product =>
+        product
+          .sizes()
+          .createMany([{ size_id: 5 }, { size_id: 6 }, { size_id: 7 }])
       )
     )
   }
