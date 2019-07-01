@@ -13,8 +13,6 @@ class SessionController {
 
       const roles = await user.getRoles()
 
-      console.log(roles)
-
       return response.status(200).send({ ...token, roles })
     } catch (err) {
       console.log(err)
