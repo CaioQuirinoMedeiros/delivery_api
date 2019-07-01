@@ -73,6 +73,8 @@ class OrderSeeder {
       }
     ])
 
+    await Order.find(clientOrders[0].id)
+
     await clientOrders[1].items().createMany([
       {
         product_size_id: Math.ceil(Math.random() * 24),
@@ -99,6 +101,8 @@ class OrderSeeder {
         quantity: Math.ceil(Math.random() * 5)
       }
     ])
+
+    await Order.find(clientOrders[1].id)
   }
 }
 
