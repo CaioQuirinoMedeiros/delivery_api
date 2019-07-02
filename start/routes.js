@@ -23,7 +23,7 @@ Route.group(() => {
 
   Route.resource('orders', 'OrderController')
     .apiOnly()
-    .validator(new Map([[['orders.store', 'orders.update'], ['Order']]]))
+    .validator(new Map([[['orders.store'], ['Order']]]))
 
   Route.resource('images', 'ImageController').apiOnly()
 })
