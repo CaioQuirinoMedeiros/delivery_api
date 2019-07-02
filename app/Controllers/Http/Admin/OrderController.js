@@ -7,13 +7,18 @@ class OrderController {
   async index ({ response, request }) {
     const status = request.input('status')
 
-    const query = Order.query().orderBy('created_at', 'DESC')
+    const query = Order.query()
 
     if (status) {
       query.where('status', status)
     }
     try {
-      const orders = await query.fetch()
+      const orders = await query
+        .orderBy('created_at', 'DESC')
+        .with('user')
+        .with('items.product_size.product.image')
+        .with('items.product_size.size')
+        .fetch()
 
       return response.status(200).send(orders)
     } catch (err) {
