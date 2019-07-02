@@ -13,8 +13,14 @@ class OrderSchema extends Schema {
       table.string('district').notNullable()
       table.string('street').notNullable()
       table
-        .enu('status', ['pending', 'cancelled', 'shipped', 'paid', 'finished'])
-        .defaultTo('pending')
+        .enu('status', [
+          'pendente',
+          'cancelado',
+          'enviado',
+          'pago',
+          'finalizado'
+        ])
+        .defaultTo('pendente')
       table.integer('number')
       table
         .integer('user_id')
