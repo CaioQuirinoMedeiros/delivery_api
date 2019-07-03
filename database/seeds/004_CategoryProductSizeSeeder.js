@@ -38,9 +38,9 @@ class CategoryProductSizeSeeder {
       { name: 'Grande', multiplier: 1.1, category_id: 1, image_id: 4 },
       { name: 'Média', multiplier: 1, category_id: 1, image_id: 5 },
       { name: 'Pequena', multiplier: 0.9, category_id: 1, image_id: 6 },
-      { name: '700g', multiplier: 0.9, category_id: 2, image_id: 4 },
+      { name: '700g', multiplier: 1.1, category_id: 2, image_id: 4 },
       { name: '500g', multiplier: 1.0, category_id: 2, image_id: 5 },
-      { name: '300g', multiplier: 1.1, category_id: 2, image_id: 6 }
+      { name: '300g', multiplier: 0.9, category_id: 2, image_id: 6 }
     ])
 
     const pizzas = await categories[0].products().createMany([
