@@ -3,9 +3,20 @@
 const Size = use('App/Models/Size')
 
 class SizeController {
-  async index ({ response }) {
+  async index ({ response, request }) {
+    const category = request.input('category')
+
+    const query = Size.query().orderBy('created_at', 'desc')
+
+    if (category) {
+      query.where('category_id', category)
+    }
+
     try {
-      const sizes = await Size.all()
+      const sizes = await query
+        .with('image')
+        .with('category')
+        .fetch()
 
       return response.status(200).send(sizes)
     } catch (err) {
