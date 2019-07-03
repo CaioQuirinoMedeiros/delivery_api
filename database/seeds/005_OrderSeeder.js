@@ -45,15 +45,15 @@ class OrderSeeder {
       orders.map(async order => {
         await order.items().createMany([
           {
-            product_size_id: Math.ceil(Math.random() * 24),
+            product_size_id: Math.ceil(Math.random() * 39),
             quantity: Math.ceil(Math.random() * 2)
           },
           {
-            product_size_id: Math.ceil(Math.random() * 24),
+            product_size_id: Math.ceil(Math.random() * 39),
             quantity: Math.ceil(Math.random() * 3)
           },
           {
-            product_size_id: Math.ceil(Math.random() * 24),
+            product_size_id: Math.ceil(Math.random() * 39),
             quantity: Math.ceil(Math.random() * 5)
           }
         ])
@@ -64,11 +64,11 @@ class OrderSeeder {
 
     await clientOrders[0].items().createMany([
       {
-        product_size_id: Math.ceil(Math.random() * 24),
+        product_size_id: Math.ceil(Math.random() * 39),
         quantity: Math.ceil(Math.random() * 2)
       },
       {
-        product_size_id: Math.ceil(Math.random() * 24),
+        product_size_id: Math.ceil(Math.random() * 39),
         quantity: Math.ceil(Math.random() * 5)
       }
     ])
@@ -77,27 +77,27 @@ class OrderSeeder {
 
     await clientOrders[1].items().createMany([
       {
-        product_size_id: Math.ceil(Math.random() * 24),
+        product_size_id: Math.ceil(Math.random() * 39),
         quantity: Math.ceil(Math.random() * 2)
       },
       {
-        product_size_id: Math.ceil(Math.random() * 24),
+        product_size_id: Math.ceil(Math.random() * 39),
         quantity: Math.ceil(Math.random() * 5)
       },
       {
-        product_size_id: Math.ceil(Math.random() * 24),
+        product_size_id: Math.ceil(Math.random() * 39),
         quantity: Math.ceil(Math.random() * 1)
       },
       {
-        product_size_id: Math.ceil(Math.random() * 24),
+        product_size_id: Math.ceil(Math.random() * 39),
         quantity: Math.ceil(Math.random() * 3)
       },
       {
-        product_size_id: Math.ceil(Math.random() * 24),
+        product_size_id: Math.ceil(Math.random() * 39),
         quantity: Math.ceil(Math.random() * 7)
       },
       {
-        product_size_id: Math.ceil(Math.random() * 24),
+        product_size_id: Math.ceil(Math.random() * 39),
         quantity: Math.ceil(Math.random() * 5)
       }
     ])
