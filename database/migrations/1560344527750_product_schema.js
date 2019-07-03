@@ -15,7 +15,7 @@ class ProductSchema extends Schema {
         .references('id')
         .inTable('images')
         .onUpdate('CASCADE')
-        .onDelete('CASCADE')
+        .onDelete('SET NULL')
       table
         .integer('category_id')
         .unsigned()
