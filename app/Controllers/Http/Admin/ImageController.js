@@ -22,7 +22,7 @@ class ImageController {
 
   async store ({ request, response }) {
     const file = request.file('image', {
-      type: ['image'],
+      types: ['image'],
       size: '2mb'
     })
 
