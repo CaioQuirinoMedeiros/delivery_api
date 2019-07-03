@@ -7,7 +7,7 @@ class CategoryController {
   async index ({ request, response }) {
     const name = request.input('name')
 
-    const query = Category.query()
+    const query = Category.query().orderBy('created_at', 'desc')
 
     if (name) {
       query.where('name', 'iLIKE', `%${name}%`)
