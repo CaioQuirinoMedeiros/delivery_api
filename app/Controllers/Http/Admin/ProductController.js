@@ -17,7 +17,11 @@ class ProductController {
     }
 
     try {
-      const products = await query.with('image').fetch()
+      const products = await query
+        .with('image')
+        .with('category')
+        .with('sizes.size')
+        .fetch()
 
       return response.status(200).send(products)
     } catch (err) {
