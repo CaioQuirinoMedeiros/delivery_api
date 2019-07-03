@@ -76,6 +76,11 @@ class ImageSeeder {
         path: 'pizzas/portuguesa.png',
         original_name: 'Pizza portuguesa',
         extension: 'png'
+      },
+      {
+        path: 'no-image.jpg',
+        original_name: 'Sem imagem',
+        extension: 'jpg'
       }
     ])
   }
