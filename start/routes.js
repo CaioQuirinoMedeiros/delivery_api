@@ -15,7 +15,7 @@ Route.group(() => {
 
   Route.resource('products', 'ProductController')
     .apiOnly()
-    .validator(new Map([[['products.store', 'products.update'], ['Product']]]))
+    .validator(new Map([[['products.store'], ['Product']]]))
 
   Route.resource('sizes', 'SizeController')
     .apiOnly()
