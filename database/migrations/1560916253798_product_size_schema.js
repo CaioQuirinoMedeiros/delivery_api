@@ -14,12 +14,14 @@ class ProductSizeSchema extends Schema {
         .references('id')
         .inTable('products')
         .onDelete('CASCADE')
+        .onUpdate('CASCADE')
       table
         .integer('size_id')
         .unsigned()
         .references('id')
         .inTable('sizes')
         .onDelete('CASCADE')
+        .onUpdate('CASCADE')
       table.timestamps()
     })
   }
