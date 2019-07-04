@@ -14,13 +14,15 @@ class SizeSchema extends Schema {
         .unsigned()
         .references('id')
         .inTable('categories')
+        .onUpdate('CASCADE')
         .onDelete('CASCADE')
       table
         .integer('image_id')
         .unsigned()
         .references('id')
         .inTable('images')
-        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
+        .onDelete('SET NULL')
       table.timestamps()
     })
   }
