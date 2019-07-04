@@ -9,6 +9,7 @@ class ProductSize extends Model {
 
     this.addHook('beforeSave', 'ProductSizeHook.calculatePrice')
   }
+
   static get traits () {
     return ['App/Models/Traits/NoTimestamp']
   }
