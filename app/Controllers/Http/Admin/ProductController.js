@@ -3,6 +3,7 @@
 
 const Product = use('App/Models/Product')
 const Category = use('App/Models/Category')
+const ProductSize = use('App/Models/ProductSize')
 
 const Database = use('Database')
 
@@ -87,12 +88,24 @@ class ProductController {
 
       product.merge({ name, base_price, image_id, category_id })
 
-      if (sizes) {
-        await product.sizes().delete(trx)
-        await product.sizes().createMany(sizes, trx)
-      }
-
       await product.save(trx)
+
+      if (sizes) {
+        await product
+          .sizes()
+          .whereNotIn('size_id', sizes.map(size => size.size_id))
+          .delete(trx)
+
+        const productSizes = await ProductSize.query()
+          .where({ product_id: product.id })
+          .pluck('size_id')
+
+        const newSizes = sizes.filter(
+          size => !productSizes.includes(Number(size.size_id))
+        )
+
+        await product.sizes().createMany(newSizes, trx)
+      }
 
       await trx.commit()
 
