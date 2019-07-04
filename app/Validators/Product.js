@@ -7,7 +7,7 @@ class Product {
 
   get rules () {
     return {
-      name: 'required|string|unique:products,name',
+      name: 'required|string',
       base_price: 'required|above:0',
       category_id: 'required|integer|exists:categories,id',
       sizes: 'array',
