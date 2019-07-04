@@ -32,7 +32,7 @@ class ImageController {
 
     try {
       await file.move(Helpers.publicPath('uploads'), {
-        name: `${Date.now()}-${file.clientName}`
+        name: `${Date.now()}-${file.clientName.replace(' ', '_')}`
       })
 
       if (!file.moved()) {
