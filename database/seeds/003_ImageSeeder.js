@@ -18,62 +18,62 @@ class ImageSeeder {
   async run () {
     await Image.createMany([
       {
-        path: 'pizzas/pizzas.jpg',
+        path: 'pizzas.jpg',
         original_name: 'pizzas',
         extension: 'jpg'
       },
       {
-        path: 'massas/massas.jpg',
+        path: 'massas.jpg',
         original_name: 'massas',
         extension: 'jpg'
       },
       {
-        path: 'sizes/tamanho-gg.png',
+        path: 'tamanho-gg.png',
         original_name: 'Pizza gigante',
         extension: 'png'
       },
       {
-        path: 'sizes/tamanho-g.png',
+        path: 'tamanho-g.png',
         original_name: 'Pizza grande',
         extension: 'png'
       },
       {
-        path: 'sizes/tamanho-m.png',
+        path: 'tamanho-m.png',
         original_name: 'Pizza média',
         extension: 'png'
       },
       {
-        path: 'sizes/tamanho-p.png',
+        path: 'tamanho-p.png',
         original_name: 'Pizza pequena',
         extension: 'png'
       },
       {
-        path: 'pizzas/bacon.png',
+        path: 'bacon.png',
         original_name: 'Pizza bacon',
         extension: 'png'
       },
       {
-        path: 'pizzas/frango_frito.png',
+        path: 'frango_frito.png',
         original_name: 'Pizza frango_frito',
         extension: 'png'
       },
       {
-        path: 'pizzas/margherita.png',
+        path: 'margherita.png',
         original_name: 'Pizza margherita',
         extension: 'png'
       },
       {
-        path: 'pizzas/mussarela.png',
+        path: 'mussarela.png',
         original_name: 'Pizza mussarela',
         extension: 'png'
       },
       {
-        path: 'pizzas/napolitana.png',
+        path: 'napolitana.png',
         original_name: 'Pizza napolitana',
         extension: 'png'
       },
       {
-        path: 'pizzas/portuguesa.png',
+        path: 'portuguesa.png',
         original_name: 'Pizza portuguesa',
         extension: 'png'
       },
