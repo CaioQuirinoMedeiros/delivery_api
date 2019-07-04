@@ -27,7 +27,7 @@ class CategoryProductSizeSeeder {
       {
         name: 'Massas',
         description:
-          '10 tipos de massas com diferentes molhos para te satisfazer.',
+          '10 tipos de massas com diferentes molhos para te satisfazer',
         cook_time: 25,
         image_id: 2
       }
