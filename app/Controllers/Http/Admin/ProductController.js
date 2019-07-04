@@ -79,12 +79,15 @@ class ProductController {
 
     try {
       const product = await Product.findOrFail(params.id)
-      const oldCategory = await Category.findOrFail(product.category_id)
-      const category = await Category.findOrFail(category_id)
 
-      await oldCategory.products().detach([product.id], trx)
+      if (category_id) {
+        const oldCategory = await Category.findOrFail(product.category_id)
+        const category = await Category.findOrFail(category_id)
 
-      await category.products().attach([product.id], trx)
+        await oldCategory.products().detach([product.id], trx)
+
+        await category.products().attach([product.id], trx)
+      }
 
       product.merge({ name, base_price, image_id, category_id })
 
