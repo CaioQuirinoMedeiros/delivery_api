@@ -3,7 +3,9 @@ node_modules
 
 # Adonis directory for storing tmp files
 tmp
-public/uploads/*
+
+# Leting uploads files because seed images,
+# public/uploads/*
 !public/uploads/.gitkeep
 
 # Environment variables, never commit this file
