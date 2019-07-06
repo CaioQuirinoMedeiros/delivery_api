@@ -16,7 +16,7 @@ class CategorySchema extends Schema {
         .references('id')
         .inTable('images')
         .onUpdate('CASCADE')
-        .onDelete('CASCADE')
+        .onDelete('SET NULL')
       table.timestamps()
     })
   }
