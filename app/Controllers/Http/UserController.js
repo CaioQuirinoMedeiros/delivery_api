@@ -10,6 +10,11 @@ class UserController {
     try {
       const clientRole = await Role.findBy('slug', 'client')
 
+      if (!clientRole) {
+        console.error('Role client não encontrada')
+        return response.status(404).send({ error: 'Role client não encontrada'})
+      }
+
       const user = await User.create(data)
 
       await user.roles().attach([clientRole.id])
