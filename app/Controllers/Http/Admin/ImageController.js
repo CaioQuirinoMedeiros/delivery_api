@@ -5,6 +5,9 @@ const Image = use('App/Models/Image')
 
 const Helpers = use('Helpers')
 const fs = use('fs')
+const { promisify } = use('util')
+
+const unlink = promisify(fs.unlink)
 
 class ImageController {
   async index ({ response }) {
@@ -87,15 +90,17 @@ class ImageController {
 
       const filePath = Helpers.publicPath(`uploads/${image.path}`)
 
-      await fs.unlink(filePath, err => {
-        if (err) throw Error
-      })
+      if (!filePath) {
+        return response.status(404).send({ error: 'Caminho da imagem inválido não encontrada'})
+      }
+
+      await unlink(filePath)
 
       await image.delete()
 
       return response.status(204).send()
     } catch (err) {
-      console.log(err)
+      console.error(err)
       return response.status(400).send({ message: 'Erro ao deletar imagem' })
     }
   }
