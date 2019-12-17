@@ -63,21 +63,15 @@ class CategoryProductSizeSeeder {
         category_id: 1
       },
       {
-        name: 'Pizza Mussarela',
-        base_price: 27,
-        image_id: 10,
-        category_id: 1
-      },
-      {
         name: 'Pizza Napolitana',
         base_price: 28.5,
-        image_id: 11,
+        image_id: 10,
         category_id: 1
       },
       {
         name: 'Pizza Portuguesa',
         base_price: 28.5,
-        image_id: 12,
+        image_id: 11,
         category_id: 1
       }
     ])

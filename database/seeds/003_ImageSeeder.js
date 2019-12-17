@@ -63,11 +63,6 @@ class ImageSeeder {
         extension: 'png'
       },
       {
-        path: 'mussarela.png',
-        original_name: 'Pizza mussarela',
-        extension: 'png'
-      },
-      {
         path: 'napolitana.png',
         original_name: 'Pizza napolitana',
         extension: 'png'
