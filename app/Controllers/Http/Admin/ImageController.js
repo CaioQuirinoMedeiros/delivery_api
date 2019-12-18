@@ -91,11 +91,9 @@ class ImageController {
 
       const filePath = Helpers.publicPath(`uploads/${image.path}`)
 
-      if (!filePath) {
-        return response.status(404).send({ error: 'Caminho da imagem inválido não encontrada'})
+      if (filePath) {
+        await unlink(filePath)
       }
-
-      await unlink(filePath)
 
       await image.delete()
 
