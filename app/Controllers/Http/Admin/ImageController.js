@@ -39,7 +39,8 @@ class ImageController {
       })
 
       if (!file.moved()) {
-        return response.status(400).send({ message: 'Erro ao salvar imagens' })
+        console.error(file)
+        return response.status(400).send({ message: 'Erro ao salvar imagem' })
       }
 
       const image = await Image.create({
