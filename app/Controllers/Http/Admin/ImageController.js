@@ -91,7 +91,7 @@ class ImageController {
 
       const filePath = Helpers.publicPath(`uploads/${image.path}`)
 
-      if (filePath) {
+      if (fs.existsSync(filePath)) {
         await unlink(filePath)
       }
 
