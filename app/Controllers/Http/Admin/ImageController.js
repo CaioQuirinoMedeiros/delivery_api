@@ -97,7 +97,7 @@ class ImageController {
 
       await image.delete()
 
-      return response.status(204).send()
+      return response.status(200).send()
     } catch (err) {
       console.error(err)
       return response.status(400).send({ message: 'Erro ao deletar imagem' })

@@ -77,7 +77,7 @@ class CategoryController {
 
       await category.delete()
 
-      return response.status(204).send()
+      return response.status(200).send()
     } catch (err) {
       console.log(err)
       return response.status(400).send({ message: 'Erro ao deletar categoria' })
