@@ -18,7 +18,7 @@ class Category {
     return {
       'name.required': 'Necessário fornecer um nome',
       'name.string': 'O nome deve ser um texto',
-      'description.required': 'Necessário fornecer um email',
+      'description.required': 'Necessário fornecer uma descrição',
       'description.string': 'A descrição deve ser um texto',
       'cook_time.required': 'Necessário fornecer o tempo de cozimento',
       'cook_time.integer': 'O tempo de cozimento deve ser um inteiro',
