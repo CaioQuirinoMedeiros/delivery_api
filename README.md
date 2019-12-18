@@ -30,7 +30,7 @@ cd delivery_api
 npm install
 ```
 
-## :wrench: Set up
+## :wrench: Setting up
 
 **Set the environment variables in a _.env_ file as exemplified in the _.env.example_**
 
