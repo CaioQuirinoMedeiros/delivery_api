@@ -75,51 +75,6 @@ class OrderController {
       return response.status(400).send({ message: 'Erro ao exibir pedido' })
     }
   }
-
-  async update ({ params, request, response }) {
-    const data = request.only([
-      'user_id',
-      'observations',
-      'zip_code',
-      'district',
-      'street',
-      'number',
-      'status'
-    ])
-    const items = request.input('items')
-
-    try {
-      let order = await Order.findOrFail(params.id)
-
-      order.merge(data)
-
-      if (items && Array.isArray(items) && items.length) {
-        await order.items().delete()
-        await order.items().createMany(items)
-      }
-
-      await order.save()
-
-      order = await Order.find(order.id)
-
-      return response.status(200).send(order)
-    } catch (err) {
-      console.log(err)
-      return response.status(400).send({ message: 'Erro ao editar pedido' })
-    }
-  }
-
-  async destroy ({ params, response }) {
-    try {
-      const order = await Order.findOrFail(params.id)
-
-      await order.delete()
-    } catch (err) {
-      console.log(err)
-
-      return response.status(400).send({ message: 'Erro ao deletar pedido' })
-    }
-  }
 }
 
 module.exports = OrderController
