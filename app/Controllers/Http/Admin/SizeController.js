@@ -81,7 +81,7 @@ class SizeController {
 
       await size.delete()
 
-      return response.status(204).send()
+      return response.status(200).send()
     } catch (err) {
       console.log(err)
       return response

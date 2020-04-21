@@ -1,25 +1,55 @@
-# Adonis API delivery app
+# Pizza Delivery - API
 
-Essa é uma API para um aplicativo de delivery. Permite criar usuário e realizar pedidos de produtos que pertencem a uma categoria e possuem diversos tamanhos. o usuário pode ser Administrador ou Cliente.
+[API Documentation](https://documenter.getpostman.com/view/7189884/SWECXvVh?version=latest)
 
-Administrador tem acesso às rotas de administrador e pode realizar CRUD de categorias (pizzas, massas, bebidas...), produtos (calabresa, mussarela...), tamanhos (grande, média, pequena...), pedidos e imagens.
+## About
 
-Cliente tem acesso às rotas de clientes, podendo visualizar categorias e produtos e criar pedidos, bem como visualizar seus próprios pedidos.
+This project is part of the final challenge of [Rocketseat bootcamp course](https://rocketseat.com.br/bootcamp). It's a delivery application of a fantasy pizza parlor.
 
-Com as rotas separadas, o applicativo, voltado para o cliente, consumirá as rotas de clientes e a aplicação web consumirá as rotas de administrador, como manda o projeto.
+## What it does?
 
-## Setup
+This application allows the creation of products of different categories and sizes, and order management, which can be done by the administrator on the web. The customer, using the app can view the products, add to cart and place a order. It also allows image upload.
 
-Para instalar as dependencias, execute o comando `npm install`.
+## Integration
 
-Configure as variáveis ambientes no arquivo .env de acordo com o .env.example.
+This AdonisJS API is consumed by an [mobile app](https://github.com/CaioQuirinoMedeiros/delivery_app), for customers, and an [web app](https://github.com/CaioQuirinoMedeiros/delivery_web) for managing. Both were built with React, check them out.
 
-Para rodar a API, em desenvolvimento, execute o comando `adonis serve --dev`
+## :arrow_down: Installing
 
-### Migrations
+**Cloning the repo**
 
-Para rodar as migrations e criar as tabelas, execute o comando `adonis migration:run`
+```shell
+git clone https://github.com/CaioQuirinoMedeiros/delivery_api.git
 
-### Seed
+cd delivery_api
+```
 
-Para alimentar as tabelas com alguns dados, execute o comando `adonis seed`
+**Installing dependencies**
+
+```shell
+npm install
+```
+
+## :wrench: Setting up
+
+**Set the environment variables in a _.env_ file as exemplified in the _.env.example_**
+
+**Run the migrations to create the database**
+
+```shell
+npx adonis migration:run
+```
+
+**Run the seeds to populate the database**
+
+```shell
+npx adonis seed
+```
+
+## :runner: Running
+
+**Just start the server**
+
+```shell
+npm run start
+```

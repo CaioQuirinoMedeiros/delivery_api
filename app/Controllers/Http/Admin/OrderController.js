@@ -50,7 +50,6 @@ class OrderController {
       return response.status(201).send(order)
     } catch (err) {
       console.log(err)
-
       return response.status(400).send({ message: 'Erro ao criar pedido' })
     }
   }
@@ -68,7 +67,6 @@ class OrderController {
       return response.status(200).send(order)
     } catch (err) {
       console.log(err)
-
       return response.status(400).send({ message: 'Erro ao exibir pedido' })
     }
   }
@@ -111,9 +109,10 @@ class OrderController {
       const order = await Order.findOrFail(params.id)
 
       await order.delete()
+
+      return response.status(200).send()
     } catch (err) {
       console.log(err)
-
       return response.status(400).send({ message: 'Erro ao deletar pedido' })
     }
   }

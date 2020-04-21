@@ -39,7 +39,8 @@ class ImageController {
       })
 
       if (!file.moved()) {
-        return response.status(400).send({ message: 'Erro ao salvar imagens' })
+        console.error(file)
+        return response.status(400).send({ message: 'Erro ao salvar imagem' })
       }
 
       const image = await Image.create({
@@ -90,15 +91,13 @@ class ImageController {
 
       const filePath = Helpers.publicPath(`uploads/${image.path}`)
 
-      if (!filePath) {
-        return response.status(404).send({ error: 'Caminho da imagem inválido não encontrada'})
+      if (fs.existsSync(filePath)) {
+        await unlink(filePath)
       }
-
-      await unlink(filePath)
 
       await image.delete()
 
-      return response.status(204).send()
+      return response.status(200).send()
     } catch (err) {
       console.error(err)
       return response.status(400).send({ message: 'Erro ao deletar imagem' })

@@ -3,7 +3,7 @@
 const ProductSize = use('App/Models/ProductSize')
 
 class ProductSizeController {
-  async index ({ request, response, params }) {
+  async index ({ request, response }) {
     const productId = request.input('product')
 
     try {
