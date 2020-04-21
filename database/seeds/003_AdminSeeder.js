@@ -17,7 +17,7 @@ const Role = use('Role')
 class UserSeeder {
   async run () {
     const admin = await User.create({
-      name: 'Administrador',
+      name: 'Admin',
       email: 'admin@delivery.com',
       password: '123456'
     })
